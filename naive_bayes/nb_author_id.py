@@ -15,14 +15,10 @@ from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
 
-
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
-
-
-
 
 #########################################################
 
@@ -30,7 +26,9 @@ from sklearn.naive_bayes import GaussianNB
 
 classifier = GaussianNB()
 
+t0=time()
 classifier.fit(features_train,labels_train)
+print "training time:", round(time() - t0, 3), "seconds"
 
 t0=time()
 
@@ -38,8 +36,7 @@ labels_pred = classifier.predict(features_test)
 
 t1=time()
 #print("time taken",t1-t0)
-print "training time:", round(time()-t0, 3), "seconds"
-
+print "prediction time:", round(time() - t0, 3), "seconds"
 
 from sklearn.metrics import accuracy_score
 
